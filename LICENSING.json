@@ -4,11 +4,11 @@
   "repository": "https://github.com/shwhwhwh/codex-branch-canvas",
   "rightsHolder": "Rui Li (@shwhwhwh)",
   "rightsHolderLogin": "shwhwhwh",
-  "policyId": "LicenseRef-Prototype-Plan-Personal-Noncommercial-1.0",
-  "licenseSha256": "9881bebaa3af8f6d59d3133ab23666999f806a2bd24d80dbc5cab3cf504f5931",
-  "policyVersion": "1.0",
+  "policyId": "LicenseRef-Prototype-Plan-Personal-Noncommercial-1.1",
+  "licenseSha256": "6da7440c53c7f1bb9fc5c6160db3145e3885e806e70380f5782f85d5e9a09f6f",
+  "policyVersion": "1.1",
   "effectiveDate": "2026-10-27",
-  "appliesTo": "Material first published under this license; previous grants and third-party rights are preserved.",
+  "appliesTo": "All owner-controlled material in this official distribution, including earlier self-owned code; valid prior grants and third-party licenses are preserved.",
   "commercialPermission": "separate-written-authorization",
   "contributorAgreement": "PP-CLA-1.0",
   "historical": [
@@ -17,6 +17,15 @@
       "license": "All rights reserved",
       "licenseFile": "LICENSES/branch-canvas-legacy-reserved.txt",
       "licenseSha256": "ce52e92b26c6bf71e64a0ccb6ca2c124ae6905784b88eeb8c77a1f8d554634f3"
+    },
+    {
+      "throughCommit": "2b1adf10ec0e44ba7c47708b5d6acc461ee4d442",
+      "license": "LicenseRef-Prototype-Plan-Personal-Noncommercial-1.0",
+      "licenseFile": "LICENSES/prototype-plan-personal-noncommercial-1.0.txt",
+      "licenseSha256": "9881bebaa3af8f6d59d3133ab23666999f806a2bd24d80dbc5cab3cf504f5931"
     }
-  ]
+  ],
+  "scope": "all-owner-controlled-material-in-official-distribution",
+  "preservesPriorGrants": true,
+  "preservesThirdPartyLicenses": true
 }

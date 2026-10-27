@@ -5,3 +5,5 @@ Issues and pull requests are welcome. Use fictional fixtures, document verificat
 ## New contribution permission
 
 Read [CONTRIBUTOR_AGREEMENT.md](CONTRIBUTOR_AGREEMENT.md) before submitting code and expressly include `CLA-ACCEPTED: PP-CLA-1.0` in the PR description if you agree and have authority. Contributors keep authorship; the grant permits Rui Li to maintain, publish and commercially sublicense accepted original contributions. Opening an issue alone grants nothing. Commercial use of restricted upstream material needs separate authorization; voluntary contribution work is free under LICENSE.
+
+Official distribution scope: LICENSE 1.1 covers all owner-controlled code, including earlier self-owned code, not only additions. Keep valid prior grants and third-party licenses; accepted contributions retain authorship and require the documented grant.

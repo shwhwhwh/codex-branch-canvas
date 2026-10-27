@@ -23,10 +23,14 @@ imply free support, a commercial grant or a right to sublicense upstream materia
 
 ## Historical and third-party material
 
-Existing grants remain in force. Historical MIT-covered material may still be used
-commercially under MIT, without buying a new license for those existing rights. A new
-grant is relevant only to new restricted material or separately requested rights/services.
-Third-party work and contributors' retained rights are governed by their applicable terms.
+The current official distribution offers all owner-controlled Covered Material
+under license 1.1, not only newly added code. Existing valid grants for earlier
+copies, versions or the material actually covered by those grants remain in force.
+If a recipient can rely on a historical MIT grant, the commercial permissions it
+already provides do not require a new paid authorization. New authorization is
+needed for commercial rights not already held. No retroactive fee is asserted.
+Third-party work retains its own licenses. Contributors retain authorship and must
+have authorized inclusion under the applicable contribution terms.
 
 Before signing a substantial commercial arrangement, obtain appropriate legal review
 of its scope, rights chain and applicable law. This page is an inquiry guide, not a

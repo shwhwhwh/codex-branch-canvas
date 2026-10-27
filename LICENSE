@@ -1,15 +1,18 @@
-Prototype Plan Personal Study and Noncommercial Experiment License 1.0
-License identifier: LicenseRef-Prototype-Plan-Personal-Noncommercial-1.0
+Prototype Plan Personal Study and Noncommercial Experiment License 1.1
+License identifier: LicenseRef-Prototype-Plan-Personal-Noncommercial-1.1
 
 Copyright (c) 2026 Rui Li (GitHub: shwhwhwh). All rights reserved.
 
 1. Scope and ownership
-This license applies only to copyrightable original material that its rights holder
-first publishes under this license (the "Covered Material"). Rui Li retains rights
-in Rui Li's original contributions. Other contributors retain rights in their own
-contributions; their inclusion and licensing require an applicable contribution grant.
-No ownership of ideas, functionality, independent implementations, third-party work,
-or material outside the licensor's rights is asserted.
+This license covers all copyrightable code and other owner-controlled material
+included in this official distribution that Rui Li owns or is expressly authorized
+to license on these terms (the "Covered Material"). Coverage is not limited to
+new additions: owner-controlled material written or published earlier is included
+in this distribution's offer. Separate third-party licenses and valid prior grants
+remain unaffected as stated in section 4. No assertion of exclusive rights is made
+over ideas, functionality, independent implementations, all AI output, third-party
+work or material outside the licensor's authority. Contributors retain their own
+copyright; inclusion under this offer requires their applicable contribution grant.
 
 2. Limited free permission
 Subject to these terms, you may obtain, copy, run, inspect and modify Covered Material
@@ -38,13 +41,19 @@ revenue share, duration, scope, support or audit obligation must be expressly ag
 in that authorization; this notice creates no automatic fee or revenue-share rate.
 
 4. Existing grants and third parties
-This license does not revoke, replace or narrow any permission already granted for
-earlier material or releases. Consult LICENSING.json, LICENSES/ and LICENSE_HISTORY.md
-where supplied. In particular, material previously made available under MIT remains
-usable under that MIT grant, including its commercial permissions. Unchanged historical
-MIT material does not become exclusively noncommercial because it appears beside new
-Covered Material. Third-party dependencies, assets, trademarks and services retain
-their own terms. No additional permission to those materials is granted here.
+This distribution offers the Covered Material under the terms of this license,
+including owner-controlled code previously offered under other terms. It does not
+revoke, replace or narrow permissions validly obtained under prior grants for
+earlier copies, versions or the material those grants actually cover. A recipient
+who can rely on a valid prior grant may continue to exercise the rights it provides,
+including MIT commercial permissions where applicable. No retroactive fee or
+automatic cancellation of such rights is asserted.
+Consult LICENSING.json, LICENSES/ and LICENSE_HISTORY.md for the historical offers.
+Archived license records preserve those offers; they do not put new content outside
+their scope under MIT or replace the current official distribution's stated offer.
+Third-party code, dependencies, assets, trademarks and services retain their own
+licenses and notices and are not relicensed by this owner-controlled offer. No
+additional permission to those third-party materials is granted here.
 
 5. Collaboration and attribution
 Issues, ideas and pull requests are welcome. Submitting a proposal does not transfer
@@ -64,5 +73,5 @@ TO THE EXTENT PERMITTED BY LAW, THE LICENSOR IS NOT LIABLE FOR CLAIMS, DAMAGES O
 LIABILITY ARISING FROM THE MATERIAL OR ITS USE.
 
 This is a source-available, limited-use license, not an OSI-approved open-source license.
-License text version: 1.0, 2026-10-27. Canonical policy:
+License text version: 1.1, 2026-10-27. Canonical policy:
 https://github.com/shwhwhwh/prototype-plan/blob/main/RIGHTS_POLICY.md

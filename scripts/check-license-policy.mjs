@@ -10,7 +10,10 @@ try {
   const manifest = JSON.parse(await readFile(`${root}/LICENSING.json`, 'utf8'));
   const anchor = JSON.parse(await readFile(`${trusted}/LICENSING.json`, 'utf8'));
   const license = await readFile(`${root}/LICENSE`, 'utf8');
-  insist(manifest.policyId === 'LicenseRef-Prototype-Plan-Personal-Noncommercial-1.0', 'Unexpected owner policy');
+  insist(manifest.policyVersion === '1.1' && manifest.scope === 'all-owner-controlled-material-in-official-distribution', 'Official distribution must cover all owner-controlled material');
+  insist(manifest.preservesPriorGrants === true && manifest.preservesThirdPartyLicenses === true, 'Prior grants and third-party licenses must be preserved');
+  insist(manifest.appliesTo === anchor.appliesTo, 'Official distribution scope statement changed');
+  insist(manifest.policyId === 'LicenseRef-Prototype-Plan-Personal-Noncommercial-1.1', 'Unexpected owner policy');
   insist(manifest.projectId === anchor.projectId && manifest.repository === anchor.repository && manifest.rightsHolder === anchor.rightsHolder, 'Owner/repository identity changed');
   insist(hash(license) === anchor.licenseSha256 && manifest.licenseSha256 === anchor.licenseSha256, 'Canonical license was changed');
   insist(JSON.stringify(manifest.historical) === JSON.stringify(anchor.historical), 'Historical licensing boundary changed');

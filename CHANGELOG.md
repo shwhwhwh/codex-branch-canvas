@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.1.3 — 2026-10-27
+
+- Policy 1.1 offers all owner-controlled code in official distributions, including earlier self-owned code, under the same free-study/noncommercial and separate-commercial terms.
+- Archive policy 1.0 text and its immutable source boundary; preserve prior grants, third-party licenses and contributor rights.
+- Update package manifests and clean-release checks. Application behavior and database format are unchanged.
+
+
 ## v0.1.2 — 2026-10-27
 
 - Correct the upgrade guide: JSON export is available for reference, but JSON restore/import is not implemented. Retain a stopped-backend SQLite backup or a stable BRANCH_CANVAS_DB path.

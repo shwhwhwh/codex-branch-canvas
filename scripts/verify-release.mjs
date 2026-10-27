@@ -17,6 +17,8 @@ assert(!(await readdir(root)).includes('data'));
 const sha=x=>createHash('sha256').update(x).digest('hex');
 const manifest=JSON.parse(await readFile(join(root,'RELEASE-MANIFEST.json'),'utf8'));
 assert.equal(manifest.version,version);
+assert.equal(manifest.policyId,'LicenseRef-Prototype-Plan-Personal-Noncommercial-1.1');
+assert.equal(manifest.licenseScope,'all-owner-controlled-material-in-official-distribution');
 for(const file of manifest.files){
   assert(!/(?:^|\/)(?:data|node_modules|\.git)(?:\/|$)/.test(file.path));
   assert.equal(sha(await readFile(join(root,file.path))),file.sha256,file.path);
@@ -24,7 +26,7 @@ for(const file of manifest.files){
 for(const file of ['LICENSE','LICENSING.json','LICENSE_HISTORY.md','COMMERCIAL_LICENSE.md','CONTRIBUTOR_AGREEMENT.md','CONTRIBUTING.md','NOTICE','LICENSES/branch-canvas-legacy-reserved.txt'])assert.equal(sha(await readFile(file)),sha(await readFile(join(root,file))));
 assert.equal(JSON.parse(await readFile(join(root,'plugin.json'),'utf8')).version,version);
 const policy=JSON.parse(await readFile(join(root,'LICENSING.json'),'utf8'));
-assert.equal(policy.policyId,'LicenseRef-Prototype-Plan-Personal-Noncommercial-1.0');
+assert.equal(policy.policyId,'LicenseRef-Prototype-Plan-Personal-Noncommercial-1.1');
 const client=new Client({name:'release-verification',version:'1'});
 try{
   await client.connect(new StdioClientTransport({command:process.execPath,args:[join(root,'dist/mcp.mjs')],stderr:'pipe'}));

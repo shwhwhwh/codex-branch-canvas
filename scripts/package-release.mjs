@@ -5,6 +5,8 @@ import { fileURLToPath } from 'node:url';
 import { execFileSync } from 'node:child_process';
 const root=fileURLToPath(new URL('../',import.meta.url));
 const {version}=JSON.parse(await readFile(join(root,'plugin.json'),'utf8'));
+const policy=JSON.parse(await readFile(join(root,'LICENSING.json'),'utf8'));
+if(policy.policyId!=='LicenseRef-Prototype-Plan-Personal-Noncommercial-1.1'||policy.scope!=='all-owner-controlled-material-in-official-distribution'||!policy.preservesPriorGrants||!policy.preservesThirdPartyLicenses)throw new Error('Incomplete release licensing scope');
 const output=join(root,'artifacts','releases','v'+version), folder=join(output,'codex-branch-canvas');
 if(await stat(output).catch(()=>null))throw new Error('Release output already exists: '+output);
 await mkdir(join(folder,'dist'),{recursive:true});
@@ -38,7 +40,7 @@ async function record(path,relative=''){
   }
 }
 await record(folder);
-await writeFile(join(folder,'RELEASE-MANIFEST.json'),JSON.stringify({project:'codex-branch-canvas',version,sourceCommit,policyId:'LicenseRef-Prototype-Plan-Personal-Noncommercial-1.0',files},null,2)+'\n');
+await writeFile(join(folder,'RELEASE-MANIFEST.json'),JSON.stringify({project:'codex-branch-canvas',version,sourceCommit,policyId:policy.policyId,licenseScope:policy.scope,files},null,2)+'\n');
 const zip=join(output,`codex-branch-canvas-v${version}-windows.zip`);
 execFileSync('powershell.exe',['-NoProfile','-Command','Add-Type -AssemblyName System.IO.Compression.FileSystem; [System.IO.Compression.ZipFile]::CreateFromDirectory($env:BRANCH_CANVAS_PACKAGE_DIRECTORY, $env:BRANCH_CANVAS_ARCHIVE_PATH, [System.IO.Compression.CompressionLevel]::Optimal, $true)'],{stdio:'inherit',windowsHide:true,env:{...process.env,BRANCH_CANVAS_PACKAGE_DIRECTORY:folder,BRANCH_CANVAS_ARCHIVE_PATH:zip}});
 const sha=createHash('sha256').update(await readFile(zip)).digest('hex');
