@@ -1,0 +1,20 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "codex-branch-canvas",
+  "version": "0.1.0",
+  "description": "A local, persistent conversation tree with in-panel Codex branches.",
+  "keywords": ["codex", "conversation-tree", "local-first"],
+  "extensions": {
+    "com.openai": {
+      "requires_local_executor": true,
+      "interface": {
+        "displayName": "Branch Canvas",
+        "shortDescription": "在一个工作区探索多条对话分支",
+        "longDescription": "本地保存问答树，从已完成回答创建追问，支持演示模式和只读 Codex 讨论。",
+        "category": "Productivity",
+        "capabilities": ["Read", "Write"],
+        "defaultPrompt": ["打开 Branch Canvas 对话树"]
+      }
+    }
+  }
+}

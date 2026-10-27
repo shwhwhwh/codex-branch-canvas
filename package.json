@@ -1,0 +1,33 @@
+{
+  "name": "codex-branch-canvas",
+  "version": "0.1.0",
+  "private": true,
+  "author": { "name": "Rui Li", "url": "https://github.com/shwhwhwh" },
+  "license": "UNLICENSED",
+  "repository": { "type": "git", "url": "https://github.com/shwhwhwh/codex-branch-canvas.git" },
+  "type": "module",
+  "description": "Local conversation trees and a single-panel Codex client.",
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "start": "node src/http.mjs",
+    "mcp": "node src/mcp.mjs",
+    "doctor": "node scripts/doctor.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "check": "node scripts/check.mjs"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/ext-apps": "^2.0.3",
+    "@modelcontextprotocol/sdk": "^1.32.2",
+    "dompurify": "^3.4.17",
+    "highlight.js": "^11.12.0",
+    "marked": "^18.1.2",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.2",
+    "jsdom": "^30.1.3"
+  }
+}

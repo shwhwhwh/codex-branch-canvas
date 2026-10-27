@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="canvas-token" content="__CANVAS_TOKEN__">
+  <meta name="color-scheme" content="light dark">
+  <title>Branch Canvas · Codex 对话树</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <main id="app">
+    <header class="app-header">
+      <div class="brand"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M7 5v9a4 4 0 0 0 4 4h6M7 10h6a4 4 0 0 0 4-4"/><circle cx="7" cy="4" r="2"/><circle cx="17" cy="4" r="2"/><circle cx="18" cy="18" r="2"/></svg></span><div><h1><span id="view-title">Branch Canvas</span></h1><p>每一种思路，都有自己的路径</p></div></div>
+      <div class="header-actions"><button id="layout-toggle" aria-pressed="false">树状列表</button><button id="doctor" title="检查 Codex 连接">连接状态</button><button id="new-tree" class="primary">＋ 新建</button></div>
+    </header>
+    <section class="tree-toolbar" aria-label="对话树选择与导出">
+      <label class="tree-picker">对话树<select id="tree-picker" aria-label="选择对话树"></select></label>
+      <span id="mode-badge" class="badge">正在加载</span><span id="saved-state">本地保存</span>
+      <label class="path-toggle"><input id="follow-current" type="checkbox" checked>跟随当前聊天</label><span id="sync-state" role="status"></span>
+      <button id="export" class="quiet" title="导出完整问答树 JSON">导出</button>
+    </section>
+    <div id="connection-error" class="error-banner" role="alert" hidden></div>
+    <div class="workspace">
+      <section class="map-panel" aria-label="可视化对话树">
+        <div class="panel-heading"><h2>探索路径 <span id="node-count"></span></h2><label class="search-label"><span class="sr-only">搜索问答</span><input id="search" placeholder="搜索问答…" type="search"></label></div>
+        <div class="graph-toolbar" aria-label="折叠与定位"><div class="fold-actions"><button id="fold-ancestors" type="button">收起父节点</button><button id="fold-descendants" type="button">收起子节点</button></div><div class="view-actions"><button id="expand-all" type="button">展开全部</button><button id="locate-root" type="button">回到顶部</button><button id="locate-current" type="button">定位当前</button></div></div>
+        <div id="viewport" tabindex="0" aria-label="对话树画布" aria-describedby="canvas-help">
+          <div id="world"><svg id="edges" aria-hidden="true"></svg><div id="graph-nodes"></div></div>
+          <div id="empty-map" hidden>没有匹配的节点</div>
+        </div>
+        <div class="map-footer"><div><span id="map-hint">点击节点打开原生聊天 · ＋ 创建追问</span><p id="canvas-help">滚轮移动 · Ctrl/⌘＋滚轮缩放 · 拖动空白处平移</p></div><div class="zoom-controls"><button id="zoom-out" aria-label="缩小画布">−</button><span id="zoom-level">100%</span><button id="zoom-in" aria-label="放大画布">＋</button><button id="fit">适应画布</button></div></div>
+      </section>
+      <section class="chat-panel" aria-label="当前分支对话">
+        <nav id="breadcrumbs" aria-label="当前分支路径"></nav>
+        <form id="composer">
+          <label id="composer-label" for="question">追问</label>
+          <textarea id="question" rows="3" maxlength="20000" placeholder="向选中的分支提问…"></textarea>
+          <div class="composer-footer"><span id="draft-state"></span><div><button id="cancel-draft" type="button" hidden>取消草稿</button><button id="recover" type="button" hidden>检查运行状态</button><button id="stop" type="button" hidden>停止</button><button id="send" type="submit" class="primary">发送</button></div></div>
+        </form>
+        <div id="node-error" class="node-error" role="alert" hidden></div>
+        <div id="notice" role="status" aria-live="polite">正在打开本地工作区…</div>
+        <section class="response-panel" aria-labelledby="chat-title">
+          <div class="panel-heading"><h2 id="chat-title">原生聊天</h2><label class="answer-view-label">回答显示<select id="answer-view"><option value="native">Codex 原生聊天</option><option value="preview">插件内预览</option></select></label></div>
+          <div class="navigation-options"><label class="path-toggle"><input id="navigate-on-select" type="checkbox" checked>选中节点后跳转</label><label class="path-toggle"><input id="only-current" type="checkbox" checked>只看当前节点</label></div>
+          <div id="transcript" aria-live="off"></div>
+          <p id="empty-answer" class="empty-answer" hidden>发送问题后，回答会显示在这里。</p>
+        </section>
+      </section>
+    </div>
+    <footer class="app-footer"><span id="surface-label">本地工作区</span><span>初版支持文本与只读讨论 · 演示回复会明确标注</span></footer>
+  </main>
+  <dialog id="create-dialog" aria-labelledby="create-heading">
+    <form id="create-form"><h2 id="create-heading">新建对话树</h2>
+      <label>名称<input name="title" required maxlength="120" value="新的探索"></label>
+      <label>运行模式<select name="mode"><option value="demo">演示模式 · 不调用模型</option><option value="codex">真实 Codex · 使用本机登录</option></select></label>
+      <label>工作目录<input name="cwd" placeholder="使用启动时的工作目录"></label>
+      <label>模型（可选）<input name="model" placeholder="使用 Codex 已配置的默认模型"></label>
+      <p class="secondary">连续追问复用同一聊天，另开方向时才创建分支。真实模式使用本机 Codex 账户额度。</p>
+      <div class="dialog-actions"><button id="close-dialog" type="button">取消</button><button type="submit" class="primary">建立</button></div>
+    </form>
+  </dialog>
+  <dialog id="export-dialog" aria-labelledby="export-heading"><h2 id="export-heading">对话树 JSON</h2><label for="export-text">当前宿主不支持直接下载，可复制以下完整记录。</label><textarea id="export-text" rows="14" readonly></textarea><div class="dialog-actions"><button id="close-export" type="button">关闭</button></div></dialog>
+  <script src="/app.js" defer></script>
+</body>
+</html>
