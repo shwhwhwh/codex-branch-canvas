@@ -9,7 +9,7 @@ const output=join(root,'artifacts','releases','v'+version), folder=join(output,'
 if(await stat(output).catch(()=>null))throw new Error('Release output already exists: '+output);
 await mkdir(join(folder,'dist'),{recursive:true});
 for(const file of ['mcp.mjs','worker.mjs','http.mjs','mcp-app.html','app.js','style.css','index.html'])await cp(join(root,'dist',file),join(folder,'dist',file));
-for(const file of ['plugin.json','mcp.json','README.md','LICENSE','NOTICE','THIRD_PARTY_NOTICES.md','CHANGELOG.md','start.cmd','stop.cmd','.agents'])await cp(join(root,file),join(folder,file),{recursive:true});
+for(const file of ['plugin.json','mcp.json','README.md','LICENSE','LICENSING.json','LICENSE_HISTORY.md','LICENSES','COMMERCIAL_LICENSE.md','CONTRIBUTOR_AGREEMENT.md','CONTRIBUTING.md','NOTICE','THIRD_PARTY_NOTICES.md','CHANGELOG.md','start.cmd','stop.cmd','.agents'])await cp(join(root,file),join(folder,file),{recursive:true});
 await mkdir(join(folder,'scripts'),{recursive:true});
 for(const file of ['start.ps1','stop.ps1','install-plugin.ps1'])await cp(join(root,'scripts',file),join(folder,'scripts',file));
 const noticeDir=join(folder,'third-party-licenses');await mkdir(noticeDir);

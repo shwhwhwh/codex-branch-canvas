@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "projectId": "branch-canvas",
+  "repository": "https://github.com/shwhwhwh/codex-branch-canvas",
+  "rightsHolder": "Rui Li (@shwhwhwh)",
+  "rightsHolderLogin": "shwhwhwh",
+  "policyId": "LicenseRef-Prototype-Plan-Personal-Noncommercial-1.0",
+  "licenseSha256": "9881bebaa3af8f6d59d3133ab23666999f806a2bd24d80dbc5cab3cf504f5931",
+  "policyVersion": "1.0",
+  "effectiveDate": "2026-10-27",
+  "appliesTo": "Material first published under this license; previous grants and third-party rights are preserved.",
+  "commercialPermission": "separate-written-authorization",
+  "contributorAgreement": "PP-CLA-1.0",
+  "historical": [
+    {
+      "throughCommit": "e69cecfe9a4d8f751644d020c23266c721f175f3",
+      "license": "All rights reserved",
+      "licenseFile": "LICENSES/branch-canvas-legacy-reserved.txt",
+      "licenseSha256": "ce52e92b26c6bf71e64a0ccb6ca2c124ae6905784b88eeb8c77a1f8d554634f3"
+    }
+  ]
+}

@@ -5,9 +5,9 @@
 **[下载 Windows v0.1.0](https://github.com/shwhwhwh/codex-branch-canvas/releases/tag/v0.1.0)** · [Prototype Plan](https://github.com/shwhwhwh/prototype-plan) · [更新记录](CHANGELOG.md)
 
 项目所有者与维护者：**[Rui Li (@shwhwhwh)](https://github.com/shwhwhwh)**。
-Copyright © 2026 Rui Li. **保留全部权利。此项目未授予开源使用许可。**
+Copyright © 2026 Rui Li. **保留全部权利；当前源码按 [LICENSE](LICENSE) 允许个人学习、非商业试验及协作改进免费使用，商业化需[单独书面授权](COMMERCIAL_LICENSE.md)。**
 第三方依赖沿用各自许可证；参见 [LICENSE](LICENSE)、[NOTICE](NOTICE) 和 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。
-安装、运行和修改的技术步骤不改变上述声明；扩展或再分发请先取得作者许可。
+欢迎提交 Issue 和 PR；贡献者保留署名，按[贡献条款](CONTRIBUTOR_AGREEMENT.md)授权项目维护与商业发布。[许可沿革](LICENSE_HISTORY.md)区分旧 v0.1.0 发行包与本次许可切换后的源码：旧 ZIP 和标签不被替换，不能把新许可说明误当成旧 ZIP 自带的许可。
 
 ## 安装前准备
 

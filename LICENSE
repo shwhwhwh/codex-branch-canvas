@@ -1,10 +1,68 @@
-Copyright (c) 2026 Rui Li (GitHub: shwhwhwh).
-All rights reserved.
+Prototype Plan Personal Study and Noncommercial Experiment License 1.0
+License identifier: LicenseRef-Prototype-Plan-Personal-Noncommercial-1.0
 
-No license to use, copy, modify, distribute, sublicense, or sell the original
-code or documentation in this project is granted, except with the copyright
-holder's prior written permission or as required by applicable law.
+Copyright (c) 2026 Rui Li (GitHub: shwhwhwh). All rights reserved.
 
-Making this repository publicly visible does not grant an open-source license.
-Third-party dependencies and materials remain subject to their own licenses;
-this notice does not claim ownership of those materials or override their terms.
+1. Scope and ownership
+This license applies only to copyrightable original material that its rights holder
+first publishes under this license (the "Covered Material"). Rui Li retains rights
+in Rui Li's original contributions. Other contributors retain rights in their own
+contributions; their inclusion and licensing require an applicable contribution grant.
+No ownership of ideas, functionality, independent implementations, third-party work,
+or material outside the licensor's rights is asserted.
+
+2. Limited free permission
+Subject to these terms, you may obtain, copy, run, inspect and modify Covered Material
+free of charge solely for (a) your personal learning and study, (b) noncommercial
+research, proof-of-concept work and experiments, and (c) voluntarily proposing project
+improvements to the canonical repository. You may share such noncommercial versions,
+including source and binaries, if you preserve this complete license, copyright and
+third-party notices, identify the original repository and your changes, and grant no
+broader rights to the upstream Covered Material. Permission to share does not permit
+commercial distribution. Ordinary use of another tool to build an independent output
+does not, by itself, place that output under this license.
+
+3. Commercial permission is separate
+No commercial use of Covered Material is granted. Commercial use includes selling,
+licensing or renting a product containing it; paid services, hosted/SaaS offerings or
+advertising-supported offerings using it; paid customer deliverables; production use
+in an enterprise's business operations; or developing it for such a commercial product
+or service. A service being free to its end users, or an organization being nonprofit,
+does not by itself make that use noncommercial. Personal study unrelated to an
+employer's business is not commercial solely because the learner is employed. Academic
+support or a research salary alone does not make a genuinely noncommercial experiment
+commercial. Voluntary contribution-only work under section 2(c) is permitted, but does
+not authorize the contributor's separate commercial deployment.
+Obtain prior written authorization from Rui Li before commercial use. Any fee,
+revenue share, duration, scope, support or audit obligation must be expressly agreed
+in that authorization; this notice creates no automatic fee or revenue-share rate.
+
+4. Existing grants and third parties
+This license does not revoke, replace or narrow any permission already granted for
+earlier material or releases. Consult LICENSING.json, LICENSES/ and LICENSE_HISTORY.md
+where supplied. In particular, material previously made available under MIT remains
+usable under that MIT grant, including its commercial permissions. Unchanged historical
+MIT material does not become exclusively noncommercial because it appears beside new
+Covered Material. Third-party dependencies, assets, trademarks and services retain
+their own terms. No additional permission to those materials is granted here.
+
+5. Collaboration and attribution
+Issues, ideas and pull requests are welcome. Submitting a proposal does not transfer
+ownership. Contribution permissions are governed by CONTRIBUTOR_AGREEMENT.md and any
+separately accepted written agreement. Preserve the authorship of accepted contributions.
+This license does not authorize representing a modified version as the official project.
+Public repository viewing and forking rights under the hosting platform's terms are
+unaffected; those platform rights do not themselves grant broader commercial use.
+
+6. Reservation, compliance and warranty
+All rights not expressly granted are reserved. Use outside this grant requires separate
+permission, except where applicable law permits it. No patent or trademark license is
+granted. These terms govern only rights the licensor can lawfully license.
+THE COVERED MATERIAL IS PROVIDED "AS IS", WITHOUT WARRANTIES OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+TO THE EXTENT PERMITTED BY LAW, THE LICENSOR IS NOT LIABLE FOR CLAIMS, DAMAGES OR OTHER
+LIABILITY ARISING FROM THE MATERIAL OR ITS USE.
+
+This is a source-available, limited-use license, not an OSI-approved open-source license.
+License text version: 1.0, 2026-10-27. Canonical policy:
+https://github.com/shwhwhwh/prototype-plan/blob/main/RIGHTS_POLICY.md
