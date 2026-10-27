@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.1.2 — 2026-10-27
+
+- Correct the upgrade guide: JSON export is available for reference, but JSON restore/import is not implemented. Retain a stopped-backend SQLite backup or a stable BRANCH_CANVAS_DB path.
+- Supersedes the brief v0.1.1 release without changing its published files or checksums. Rights, features and database format are unchanged.
+
+
 ## v0.1.1 — 2026-10-27
 
 - New downloadable package includes the personal-study/noncommercial license, commercial inquiry terms, contribution agreement and preserved historical notices.

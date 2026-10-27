@@ -51,7 +51,7 @@ export class CodexClient extends EventEmitter {
       if (msg.error) { const error = new Error(msg.error.message || 'Codex 请求失败。'); error.rpcError = true; error.rpcCode = msg.error.code; pending.reject(error); }
       else pending.resolve(msg.result);
     });
-    await this.request('initialize', { clientInfo: { name: 'codex_branch_canvas', title: 'Branch Canvas', version: '0.1.1' } });
+    await this.request('initialize', { clientInfo: { name: 'codex_branch_canvas', title: 'Branch Canvas', version: '0.1.2' } });
     this.write({ method: 'initialized', params: {} });
   }
   write(msg) {

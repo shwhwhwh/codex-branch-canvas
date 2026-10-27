@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "codex-branch-canvas",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A local, persistent conversation tree with in-panel Codex branches.",
   "keywords": ["codex", "conversation-tree", "local-first"],
   "extensions": {
