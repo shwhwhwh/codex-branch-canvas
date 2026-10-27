@@ -1,10 +1,20 @@
 {
   "name": "branch-canvas-local",
-  "interface": { "displayName": "Branch Canvas 开发版" },
-  "plugins": [{
-    "name": "codex-branch-canvas",
-    "source": { "source": "local", "path": "./" },
-    "policy": { "installation": "AVAILABLE", "authentication": "ON_USE" },
-    "category": "Productivity"
-  }]
+  "interface": {
+    "displayName": "Branch Canvas"
+  },
+  "plugins": [
+    {
+      "name": "codex-branch-canvas",
+      "source": {
+        "source": "local",
+        "path": "./"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    }
+  ]
 }
