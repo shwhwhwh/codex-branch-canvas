@@ -23,7 +23,7 @@ export class CanvasService {
   }
   status() {
     let codexInstalled = true; try { resolveCodex(); } catch { codexInstalled = false; }
-    return { version: '0.1.0', codexInstalled, readOnly: true, cwd: this.cwd, threadPolicy: 'reuse-tail-fork-history-v1' };
+    return { version: '0.1.1', codexInstalled, readOnly: true, cwd: this.cwd, threadPolicy: 'reuse-tail-fork-history-v1' };
   }
   snapshot(treeId) { return { ...this.store.snapshot(treeId), runtime: this.status() }; }
   async execute(action, args = {}) {

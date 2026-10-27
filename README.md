@@ -2,12 +2,12 @@
 
 在原版 Codex 右侧插件标签页中，用树形画布组织问答、从同一回答探索不同分支。
 
-**[下载 Windows v0.1.0](https://github.com/shwhwhwh/codex-branch-canvas/releases/tag/v0.1.0)** · [Prototype Plan](https://github.com/shwhwhwh/prototype-plan) · [更新记录](CHANGELOG.md)
+**[下载 Windows v0.1.1](https://github.com/shwhwhwh/codex-branch-canvas/releases/tag/v0.1.1)** · [Prototype Plan](https://github.com/shwhwhwh/prototype-plan) · [更新记录](CHANGELOG.md)
 
 项目所有者与维护者：**[Rui Li (@shwhwhwh)](https://github.com/shwhwhwh)**。
 Copyright © 2026 Rui Li. **保留全部权利；当前源码按 [LICENSE](LICENSE) 允许个人学习、非商业试验及协作改进免费使用，商业化需[单独书面授权](COMMERCIAL_LICENSE.md)。**
 第三方依赖沿用各自许可证；参见 [LICENSE](LICENSE)、[NOTICE](NOTICE) 和 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。
-欢迎提交 Issue 和 PR；贡献者保留署名，按[贡献条款](CONTRIBUTOR_AGREEMENT.md)授权项目维护与商业发布。[许可沿革](LICENSE_HISTORY.md)区分旧 v0.1.0 发行包与本次许可切换后的源码：旧 ZIP 和标签不被替换，不能把新许可说明误当成旧 ZIP 自带的许可。
+欢迎提交 Issue 和 PR；贡献者保留署名，按[贡献条款](CONTRIBUTOR_AGREEMENT.md)授权项目维护与商业发布。[许可沿革](LICENSE_HISTORY.md)记录旧 v0.1.0 与新版的授权边界。本次 v0.1.1 ZIP 已包含新许可、商业授权说明和贡献条款；旧发行版撤下公开 Releases 下载入口，原文件、标签与既有授权不被改写。
 
 ## 安装前准备
 
@@ -25,12 +25,12 @@ Copyright © 2026 Rui Li. **保留全部权利；当前源码按 [LICENSE](LICEN
 
 ### 1. 下载并解压
 
-从 [v0.1.0 Releases](https://github.com/shwhwhwh/codex-branch-canvas/releases/tag/v0.1.0) 下载 `codex-branch-canvas-v0.1.0-windows.zip`，可同时下载 `SHA256SUMS.txt` 校验完整性。
+从 [v0.1.1 Releases](https://github.com/shwhwhwh/codex-branch-canvas/releases/tag/v0.1.1) 下载 `codex-branch-canvas-v0.1.1-windows.zip`，可同时下载 `SHA256SUMS.txt` 校验完整性。
 
 解压到准备长期保留、你有写权限的目录。例如将 ZIP 放在“下载”后运行：
 
 ```powershell
-Expand-Archive -LiteralPath "$HOME\Downloads\codex-branch-canvas-v0.1.0-windows.zip" -DestinationPath "$HOME\Apps"
+Expand-Archive -LiteralPath "$HOME\Downloads\codex-branch-canvas-v0.1.1-windows.zip" -DestinationPath "$HOME\Apps"
 Set-Location "$HOME\Apps\codex-branch-canvas"
 ```
 
@@ -40,7 +40,7 @@ Set-Location "$HOME\Apps\codex-branch-canvas"
 需要校验时，将下列结果与 `SHA256SUMS.txt` 对比：
 
 ```powershell
-Get-FileHash "$HOME\Downloads\codex-branch-canvas-v0.1.0-windows.zip" -Algorithm SHA256
+Get-FileHash "$HOME\Downloads\codex-branch-canvas-v0.1.1-windows.zip" -Algorithm SHA256
 ```
 
 ### 2. 注册并安装插件
@@ -114,6 +114,8 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\install-plugin.ps1
 
 ## 数据与升级
 
+升级到 v0.1.1：先导出对话树 JSON 并关闭插件后台，将新版解压到新的长期目录，在该目录重新运行安装助手。重新打开 Codex，必要时在设置中关闭再开启插件并重开面板。保留旧数据备份，勿直接覆盖正在使用的目录；通过 JSON 导入恢复需要的树。
+
 - 桌面插件默认数据在 Codex 管理的插件安装目录内 `data/canvas.sqlite`；路径随客户端和安装方式变化。
 - 独立本地工作区默认数据在解压目录 `data/`。双击 `start.cmd` 打开 `http://127.0.0.1:47832/`；`stop.cmd` 停止该本地工作区服务。
 - 两种模式只有指向**同一数据库路径**时才共享数据，不要假设默认路径相同。
@@ -149,7 +151,7 @@ npm test
 npm run package
 ```
 
-Windows 打包结果位于 `artifacts/releases/v0.1.0/`，包含预构建 ZIP 和校验文件；已存在的输出目录会拒绝覆盖。
+Windows 打包结果位于 `artifacts/releases/v0.1.1/`，包含预构建 ZIP 和校验文件；已存在的输出目录会拒绝覆盖。
 源码安装必须先构建，再注册市场；直接注册 GitHub 源码快照不会自动构建。
 
 `src/` 为后台，`web/` 为界面，`tests/` 使用合成数据。`desktop-patch/` 只保留早期固定旧构建的实验副本源码，不参与普通插件构建、安装或运行；发行包不分发 Codex 二进制。

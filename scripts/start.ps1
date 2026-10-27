@@ -11,7 +11,7 @@ $canvasUrl = 'http://127.0.0.1:47832/'
 $canvasAvailable = $false
 try {
   $canvasResponse = Invoke-RestMethod -Uri ($canvasUrl + 'api/state') -TimeoutSec 2
-  $canvasAvailable = ($canvasResponse.runtime.version -eq '0.1.0')
+  $canvasAvailable = ($canvasResponse.runtime.version -eq '0.1.1')
 } catch {}
 if (-not $canvasAvailable) {
   $env:BRANCH_CANVAS_DB = Join-Path $canvasData 'canvas.sqlite'
@@ -19,7 +19,7 @@ if (-not $canvasAvailable) {
   @{ pid = $canvasProcess.Id; entry = $canvasEntry } | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $canvasData 'server.json') -Encoding UTF8
   for ($canvasAttempt = 0; $canvasAttempt -lt 25; $canvasAttempt++) {
     Start-Sleep -Milliseconds 200
-    try { $canvasResponse = Invoke-RestMethod -Uri ($canvasUrl + 'api/state') -TimeoutSec 1; if ($canvasResponse.runtime.version -eq '0.1.0') { $canvasAvailable = $true; break } } catch {}
+    try { $canvasResponse = Invoke-RestMethod -Uri ($canvasUrl + 'api/state') -TimeoutSec 1; if ($canvasResponse.runtime.version -eq '0.1.1') { $canvasAvailable = $true; break } } catch {}
     if ($canvasProcess.HasExited) { break }
   }
   if (-not $canvasAvailable) { throw ('Unable to start. See ' + (Join-Path $canvasData 'server-error.log')) }

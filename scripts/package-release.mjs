@@ -27,6 +27,18 @@ for(const entry of await readdir(join(root,'node_modules'),{withFileTypes:true})
   if(entry.name.startsWith('@'))for(const child of await readdir(path))await collectPackage(join(path,child));else await collectPackage(path);
 }
 await writeFile(join(noticeDir,'manifest.json'),JSON.stringify(packages,null,2)+'\n');
+const sourceCommit=execFileSync('git',['rev-parse','HEAD'],{cwd:root,encoding:'utf8',windowsHide:true}).trim();
+const files=[];
+async function record(path,relative=''){
+  for(const entry of await readdir(path,{withFileTypes:true})){
+    const name=relative?relative+'/'+entry.name:entry.name;
+    if(entry.isSymbolicLink())throw new Error('Symlink is not a release input: '+name);
+    if(entry.isDirectory())await record(join(path,entry.name),name);
+    else files.push({path:name,sha256:createHash('sha256').update(await readFile(join(path,entry.name))).digest('hex')});
+  }
+}
+await record(folder);
+await writeFile(join(folder,'RELEASE-MANIFEST.json'),JSON.stringify({project:'codex-branch-canvas',version,sourceCommit,policyId:'LicenseRef-Prototype-Plan-Personal-Noncommercial-1.0',files},null,2)+'\n');
 const zip=join(output,`codex-branch-canvas-v${version}-windows.zip`);
 execFileSync('powershell.exe',['-NoProfile','-Command','Add-Type -AssemblyName System.IO.Compression.FileSystem; [System.IO.Compression.ZipFile]::CreateFromDirectory($env:BRANCH_CANVAS_PACKAGE_DIRECTORY, $env:BRANCH_CANVAS_ARCHIVE_PATH, [System.IO.Compression.CompressionLevel]::Optimal, $true)'],{stdio:'inherit',windowsHide:true,env:{...process.env,BRANCH_CANVAS_PACKAGE_DIRECTORY:folder,BRANCH_CANVAS_ARCHIVE_PATH:zip}});
 const sha=createHash('sha256').update(await readFile(zip)).digest('hex');

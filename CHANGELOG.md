@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.1.1 — 2026-10-27
+
+- New downloadable package includes the personal-study/noncommercial license, commercial inquiry terms, contribution agreement and preserved historical notices.
+- Free personal study, noncommercial experiments and collaborative improvements; commercial use needs separate written authorization.
+- Runtime, plugin metadata and launcher versions are aligned. Existing tree behavior and data format are unchanged.
+- Older release downloads are withdrawn from the public release list without rewriting their files, Git tags or earlier permissions. Back up exported trees before upgrading.
+
 ## v0.1.0 — 2026-10-27
 
 - First downloadable Windows plugin package, with bundled UI/backend and license notices.

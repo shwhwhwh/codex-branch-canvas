@@ -15,7 +15,7 @@ export function hostThreadId(extra) {
   return typeof value === 'string' && /^[a-zA-Z0-9_-]{1,100}$/.test(value) ? value : undefined;
 }
 export function createMcpServer(service) {
-  const server = new McpServer({ name: 'codex-branch-canvas', version: '0.1.0' });
+  const server = new McpServer({ name: 'codex-branch-canvas', version: '0.1.1' });
   const reply = data => ({ content: [{ type: 'text', text: 'Branch Canvas workspace updated.' }],
     structuredContent: { treeId: data.tree?.id || null, nodeCount: data.nodes?.length || 0 }, _meta: { canvas: data } });
   registerAppTool(server, 'canvas_open', {
