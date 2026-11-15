@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.1.4 — 2026-11-15
+
+- 当前聊天同步慢或失败时，先打开本地对话树，并单独提示同步状态。
+- 安装助手在注册插件前检查构建文件和 Node.js 的 SQLite 支持。
+- README 区分 Windows 发行包和源码 ZIP，并增加面板加载失败的排查步骤。
+
 ## v0.1.3 — 2026-10-27
 
 - Policy 1.1 offers all owner-controlled code in official distributions, including earlier self-owned code, under the same free-study/noncommercial and separate-commercial terms.

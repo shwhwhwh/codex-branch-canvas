@@ -23,7 +23,7 @@ export class CanvasService {
   }
   status() {
     let codexInstalled = true; try { resolveCodex(); } catch { codexInstalled = false; }
-    return { version: '0.1.3', codexInstalled, readOnly: true, cwd: this.cwd, threadPolicy: 'reuse-tail-fork-history-v1' };
+    return { version: '0.1.4', codexInstalled, readOnly: true, cwd: this.cwd, threadPolicy: 'reuse-tail-fork-history-v1' };
   }
   snapshot(treeId) { return { ...this.store.snapshot(treeId), runtime: this.status() }; }
   async execute(action, args = {}) {
@@ -38,9 +38,15 @@ export class CanvasService {
             const thread = await this.client.readConversation(id);
             const conversation = completedConversation(thread, { title: (thread.name || thread.preview || '当前聊天').slice(0, 120), allowEmpty: true });
             entry.result = syncCompletedConversation(this.store.db, conversation);
-          })().finally(() => { entry.promise = null; });
+          })().catch(() => { entry.failed = true; }).finally(() => { entry.promise = null; });
         }
-        if (entry.promise) await entry.promise;
+        if (entry.promise) {
+          if (args.opening === true) {
+            const done = await Promise.race([entry.promise.then(() => true), delay(1200, false, { ref: false })]);
+            if (!done) return { ...this.snapshot(args.treeId), sourceSync: { available: false, pending: true } };
+          } else await entry.promise;
+        }
+        if (entry.failed) return { ...this.snapshot(args.treeId), sourceSync: { available: false, error: '当前聊天同步失败。请检查本机 Codex CLI 和聊天类型。' } };
         if (!entry.result) { this.sourceSyncs.delete(id); throw new AppError('当前聊天同步失败，请重试。'); }
         return { ...this.snapshot(entry.result.treeId), sourceSync: { available: true, sourceThreadId: id, added: entry.result.added, at: entry.at } };
       }

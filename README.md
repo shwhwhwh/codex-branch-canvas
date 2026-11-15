@@ -2,12 +2,12 @@
 
 在原版 Codex 右侧插件标签页中，用树形画布组织问答、从同一回答探索不同分支。
 
-**[下载 Windows v0.1.3](https://github.com/shwhwhwh/codex-branch-canvas/releases/tag/v0.1.3)** · [Prototype Plan](https://github.com/shwhwhwh/prototype-plan) · [更新记录](CHANGELOG.md)
+**[下载 Windows v0.1.4](https://github.com/shwhwhwh/codex-branch-canvas/releases/tag/v0.1.4)** · [Prototype Plan](https://github.com/shwhwhwh/prototype-plan) · [更新记录](CHANGELOG.md)
 
 项目所有者与维护者：**[Rui Li (@shwhwhwh)](https://github.com/shwhwhwh)**。
 Copyright © 2026 Rui Li. **保留全部权利；今后官方发行中的全部自有代码（包括此前自有代码，不只新增部分）统一按 [LICENSE](LICENSE) 1.1 提供，允许个人学习、非商业试验及协作改进免费使用，商业化需[单独书面授权](COMMERCIAL_LICENSE.md)。**
 第三方依赖沿用各自许可证；参见 [LICENSE](LICENSE)、[NOTICE](NOTICE) 和 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。
-欢迎提交 Issue 和 PR；贡献者保留署名，按[贡献条款](CONTRIBUTOR_AGREEMENT.md)授权项目维护与商业发布。[许可沿革](LICENSE_HISTORY.md)记录旧 v0.1.0 与新版的授权边界。本次 v0.1.3 ZIP 已包含覆盖全部自有代码的新许可，并保留旧 1.0 授权原文；包内还有商业授权说明和贡献条款；旧发行版撤下公开 Releases 下载入口，原文件、标签与既有授权不被改写。
+欢迎提交 Issue 和 PR；贡献者保留署名，按[贡献条款](CONTRIBUTOR_AGREEMENT.md)授权项目维护与商业发布。[许可沿革](LICENSE_HISTORY.md)记录旧 v0.1.0 与新版的授权边界。本次 v0.1.4 ZIP 已包含覆盖全部自有代码的新许可，并保留旧 1.0 授权原文；包内还有商业授权说明和贡献条款；旧发行版撤下公开 Releases 下载入口，原文件、标签与既有授权不被改写。
 
 ## 安装前准备
 
@@ -25,12 +25,12 @@ Copyright © 2026 Rui Li. **保留全部权利；今后官方发行中的全部�
 
 ### 1. 下载并解压
 
-从 [v0.1.3 Releases](https://github.com/shwhwhwh/codex-branch-canvas/releases/tag/v0.1.3) 下载 `codex-branch-canvas-v0.1.3-windows.zip`，可同时下载 `SHA256SUMS.txt` 校验完整性。
+从 [v0.1.4 Releases](https://github.com/shwhwhwh/codex-branch-canvas/releases/tag/v0.1.4) 下载 `codex-branch-canvas-v0.1.4-windows.zip`，可同时下载 `SHA256SUMS.txt` 校验完整性。
 
 解压到准备长期保留、你有写权限的目录。例如将 ZIP 放在“下载”后运行：
 
 ```powershell
-Expand-Archive -LiteralPath "$HOME\Downloads\codex-branch-canvas-v0.1.3-windows.zip" -DestinationPath "$HOME\Apps"
+Expand-Archive -LiteralPath "$HOME\Downloads\codex-branch-canvas-v0.1.4-windows.zip" -DestinationPath "$HOME\Apps"
 Set-Location "$HOME\Apps\codex-branch-canvas"
 ```
 
@@ -40,7 +40,7 @@ Set-Location "$HOME\Apps\codex-branch-canvas"
 需要校验时，将下列结果与 `SHA256SUMS.txt` 对比：
 
 ```powershell
-Get-FileHash "$HOME\Downloads\codex-branch-canvas-v0.1.3-windows.zip" -Algorithm SHA256
+Get-FileHash "$HOME\Downloads\codex-branch-canvas-v0.1.4-windows.zip" -Algorithm SHA256
 ```
 
 ### 2. 注册并安装插件
@@ -114,7 +114,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\install-plugin.ps1
 
 ## 数据与升级
 
-升级到 v0.1.3：先导出对话树 JSON 并关闭插件后台，将新版解压到新的长期目录，在该目录重新运行安装助手。重新打开 Codex，必要时在设置中关闭再开启插件并重开面板。JSON 导出目前仅供查阅备份，尚无 JSON 导入入口。保留旧数据备份，勿直接覆盖正在使用的目录。恢复原有树须先停止两个版本后台，再使用 SQLite 一致性备份（包含相关 WAL 文件），或让新版通过 BRANCH_CANVAS_DB 指向原数据库；不要复制旧进程的 PID、令牌或运行元数据。
+升级到 v0.1.4：先导出对话树 JSON 并关闭插件后台，将新版解压到新的长期目录，在该目录重新运行安装助手。重新打开 Codex，必要时在设置中关闭再开启插件并重开面板。JSON 导出目前仅供查阅备份，尚无 JSON 导入入口。保留旧数据备份，勿直接覆盖正在使用的目录。恢复原有树须先停止两个版本后台，再使用 SQLite 一致性备份（包含相关 WAL 文件），或让新版通过 BRANCH_CANVAS_DB 指向原数据库；不要复制旧进程的 PID、令牌或运行元数据。
 
 - 桌面插件默认数据在 Codex 管理的插件安装目录内 `data/canvas.sqlite`；路径随客户端和安装方式变化。
 - 独立本地工作区默认数据在解压目录 `data/`。双击 `start.cmd` 打开 `http://127.0.0.1:47832/`；`stop.cmd` 停止该本地工作区服务。
@@ -130,12 +130,24 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\install-plugin.ps1
 | Node.js 太旧 | 新终端运行 `node --version`，确认 24+ |
 | 找不到 codex | 检查 CLI 安装、登录和 PATH；仅安装桌面端不保证终端命令可用 |
 | 右侧“＋”没有入口 | 确认插件已安装启用、客户端支持该面板，重开 Codex |
-| “未能显示对话树” / 连接失败 | 设置中关闭再开启插件，关闭再打开标签页 |
+| “未能显示对话树” / 连接失败 | 按下方步骤检查安装包、Node.js 和插件连接 |
 | “宿主未提供聊天标识” | 当前宿主没传聊天 ID，可手动选已有树；不会按最近活跃聊天猜测 |
 | 看不到正在生成的回答 | 等待回答完成并同步 |
 | “待确认”节点 | 先检查运行状态，避免重复发送；必要时从已确认父回答重新分支 |
 
 真实讨论使用只读文件权限，不自动批准文件修改或额外权限请求；宿主接口兼容性取决于客户端版本。
+
+出现 Codex 的「未能显示对话树」时，先在解压目录的新 PowerShell 检查：
+
+```powershell
+node --version
+codex --version
+Test-Path -LiteralPath .\dist\mcp.mjs, .\dist\worker.mjs, .\dist\mcp-app.html
+```
+
+三项文件检查应均为 `True`。GitHub 绿色 **Code → Download ZIP** 和 Releases 的 **Source code (zip)** 都是源码，需要先执行 `npm ci` 和 `npm run build`，或改用 Releases 中名为 `codex-branch-canvas-v0.1.4-windows.zip` 的预构建包。确认 Node.js 为 24+ 后，从完整解压目录重跑安装助手。若刚安装 Node.js，完全退出 Codex，再重新启动以加载新的 PATH。接着在「设置 → 插件」关闭并开启 Branch Canvas，再从右侧「＋」打开「对话树」。
+
+若仍失败，先在一个本机聊天复试，并记录 ZIP 文件名、两条版本命令和三项文件检查的输出，连同安装助手的第一条错误一起反馈。
 
 ## 源码开发
 
@@ -151,7 +163,7 @@ npm test
 npm run package
 ```
 
-Windows 打包结果位于 `artifacts/releases/v0.1.3/`，包含预构建 ZIP 和校验文件；已存在的输出目录会拒绝覆盖。
+Windows 打包结果位于 `artifacts/releases/v0.1.4/`，包含预构建 ZIP 和校验文件；已存在的输出目录会拒绝覆盖。
 源码安装必须先构建，再注册市场；直接注册 GitHub 源码快照不会自动构建。
 
 `src/` 为后台，`web/` 为界面，`tests/` 使用合成数据。`desktop-patch/` 只保留早期固定旧构建的实验副本源码，不参与普通插件构建、安装或运行；发行包不分发 Codex 二进制。

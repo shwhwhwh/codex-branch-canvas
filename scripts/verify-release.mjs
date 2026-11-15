@@ -27,21 +27,37 @@ for(const file of ['LICENSE','LICENSING.json','LICENSE_HISTORY.md','COMMERCIAL_L
 assert.equal(JSON.parse(await readFile(join(root,'plugin.json'),'utf8')).version,version);
 const policy=JSON.parse(await readFile(join(root,'LICENSING.json'),'utf8'));
 assert.equal(policy.policyId,'LicenseRef-Prototype-Plan-Personal-Noncommercial-1.1');
-const client=new Client({name:'release-verification',version:'1'});
-try{
-  await client.connect(new StdioClientTransport({command:process.execPath,args:[join(root,'dist/mcp.mjs')],stderr:'pipe'}));
-  const response=await client.callTool({name:'canvas_open',arguments:{}});assert(!response.isError);assert.equal(response._meta.canvas.nodes.length,2);assert.equal(response._meta.canvas.runtime.version,version);
-  const ui=await client.readResource({uri:'ui://branch-canvas/workspace.html'});assert(ui.contents[0].text.includes('locate-root'));assert(ui.contents[0].text.includes('follow-current'));
-}finally{await client.close();}
+async function smokePanel(pluginDir, env) {
+  const client=new Client({name:'release-verification',version:'1'});
+  try {
+    await client.connect(new StdioClientTransport({command:process.execPath,args:[join(pluginDir,'dist/mcp.mjs')],cwd:pluginDir,env,stderr:'pipe'}));
+    const tools=await client.listTools();
+    const opener=tools.tools.find(tool=>tool.name==='canvas_open');
+    assert(opener?._meta?.['openai/ui']?.entrypoints?.some(entry=>entry.type==='thread'));
+    const response=await client.callTool({name:'canvas_open',arguments:{}});
+    assert(!response.isError);assert.equal(response._meta.canvas.nodes.length,2);assert.equal(response._meta.canvas.runtime.version,version);
+    const unavailable=await client.callTool({name:'canvas_open',arguments:{},_meta:{thread_id:'11111111-1111-4111-8111-111111111111'}});
+    assert(!unavailable.isError);assert.equal(unavailable._meta.canvas.tree.id,response._meta.canvas.tree.id);
+    assert.equal(unavailable._meta.canvas.sourceSync.available,false);
+    assert(unavailable._meta.canvas.sourceSync.error || unavailable._meta.canvas.sourceSync.pending);
+    const ui=await client.readResource({uri:'ui://branch-canvas/workspace.html'});
+    assert(ui.contents[0].text.includes('locate-root'));assert(ui.contents[0].text.includes('follow-current'));
+    assert.doesNotMatch(ui.contents[0].text,/<script src=/);
+  }finally{await client.close();}
+}
+const env={...process.env,CODEX_HOME:join(testRoot,'isolated-codex-home')};
+await mkdir(env.CODEX_HOME,{recursive:true});
+await smokePanel(root,env);
 const cli=process.env.BRANCH_CANVAS_TEST_CODEX;
 let installed=false;
 if(cli){
-  const env={...process.env,CODEX_HOME:join(testRoot,'isolated-codex-home')};
-  await mkdir(env.CODEX_HOME,{recursive:true});
   for(const args of [['plugin','marketplace','add',root,'--json'],['plugin','add','codex-branch-canvas@branch-canvas-local','--json']]){
     const output=execFileSync(cli,args,{env,encoding:'utf8',windowsHide:true});
     assert(output);console.log(output.trim());
   }
+  const installedDir=join(env.CODEX_HOME,'plugins','cache','branch-canvas-local','codex-branch-canvas',version);
+  assert.equal(sha(await readFile(join(installedDir,'dist','mcp-app.html'))),sha(await readFile(join(root,'dist','mcp-app.html'))));
+  await smokePanel(installedDir,env);
   installed=true;
 }
 await writeFile('artifacts/release-verification.json',JSON.stringify({version,sourceCommit:manifest.sourceCommit,zip,sha256:sha(await readFile(zip)),filesVerified:manifest.files.length,runtimeSmokePassed:true,isolatedCliInstallPassed:installed,copyrightPreserved:true,modelCalls:0,testRoot},null,2));

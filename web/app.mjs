@@ -52,6 +52,12 @@ function notice(message, error = false) { $('#notice').textContent = message; $(
 function showError(error) { notice(error.message || String(error), true); }
 function apply(snapshot) {
   if (!snapshot?.nodes) return;
+  const sync = snapshot.sourceSync;
+  if (sync || !followCurrent || !modelClient) {
+    $('#sync-state').textContent = modelClient && followCurrent
+      ? sync?.error || (sync?.available ? '已同步当前聊天' : sync?.pending ? '正在同步当前聊天…' : '宿主未提供聊天标识')
+      : '手动浏览';
+  }
   const previous = getNode(selectedId);
   const changedTree = data?.tree?.id !== snapshot.tree?.id;
   data = snapshot; selectedId = data.tree?.selectedId || data.nodes[0]?.id;
@@ -346,9 +352,7 @@ $('#follow-current').onchange = async () => {
   catch (error) { showError(error); }
 };
 async function readCurrentState() {
-  const snapshot = await api('state', { treeId: data?.tree?.id || requestedTreeId, followCurrent: Boolean(modelClient && followCurrent) });
-  $('#sync-state').textContent = modelClient && followCurrent ? (snapshot.sourceSync?.available ? '已同步当前聊天' : '宿主未提供聊天标识') : '手动浏览';
-  return snapshot;
+  return api('state', { treeId: data?.tree?.id || requestedTreeId, followCurrent: Boolean(modelClient && followCurrent) });
 }
 $('#new-tree').onclick = () => { $('#create-dialog').showModal(); $('#create-form input[name="title"]').select(); };
 $('#close-dialog').onclick = () => $('#create-dialog').close();
@@ -382,9 +386,9 @@ async function init() {
     modelClient.onhostcontextchanged = applyHostContext;
     modelClient.ontoolinput = params => { if (typeof params.arguments?.treeId === 'string') requestedTreeId = params.arguments.treeId; };
     modelClient.ontoolresult = result => { if (!data && result._meta?.canvas && (!requestedTreeId || result._meta.canvas.tree?.id === requestedTreeId)) apply(result._meta.canvas); };
+    api = async (action, args = {}) => { const result = await modelClient.callServerTool({ name: 'canvas_action', arguments: { action, args } }); if (result.isError) throw new Error(result.content?.find(c => c.type === 'text')?.text || '插件操作失败。'); return result._meta?.canvas || result.structuredContent; };
     await modelClient.connect();
     applyHostContext(modelClient.getHostContext());
-    api = async (action, args = {}) => { const result = await modelClient.callServerTool({ name: 'canvas_action', arguments: { action, args } }); if (result.isError) throw new Error(result.content?.find(c => c.type === 'text')?.text || '插件操作失败。'); return result._meta?.canvas || result.structuredContent; };
     $('#surface-label').textContent = 'Codex 插件面板';
   } else {
     const token = $('meta[name="canvas-token"]').content;
@@ -395,7 +399,8 @@ async function init() {
   }
   updateLayout();
   $('#follow-current').checked = followCurrent;
-  apply(await readCurrentState()); notice(data.tree?.mode === 'codex' ? '真实 Codex 工作区。' : '演示树已打开。点击回答旁的 ＋，探索另一条路径。');
+  if (!data) apply(await readCurrentState());
+  notice(data.tree?.mode === 'codex' ? '真实 Codex 工作区。' : '演示树已打开。点击回答旁的 ＋，探索另一条路径。');
   setInterval(async () => {
     if (polling || !data?.tree || document.hidden) return;
     const epoch = mutationEpoch; polling = true;

@@ -15,7 +15,7 @@ export function hostThreadId(extra) {
   return typeof value === 'string' && /^[a-zA-Z0-9_-]{1,100}$/.test(value) ? value : undefined;
 }
 export function createMcpServer(service) {
-  const server = new McpServer({ name: 'codex-branch-canvas', version: '0.1.3' });
+  const server = new McpServer({ name: 'codex-branch-canvas', version: '0.1.4' });
   const reply = data => ({ content: [{ type: 'text', text: 'Branch Canvas workspace updated.' }],
     structuredContent: { treeId: data.tree?.id || null, nodeCount: data.nodes?.length || 0 }, _meta: { canvas: data } });
   registerAppTool(server, 'canvas_open', {
@@ -23,7 +23,7 @@ export function createMcpServer(service) {
     inputSchema: { treeId: z.string().optional() },
     annotations: { readOnlyHint: true, openWorldHint: false },
     _meta: { ui: { resourceUri }, 'openai/ui': { entrypoints: [{ type: 'global' }, { type: 'thread' }] } }
-  }, async ({ treeId }, extra) => reply(await service.execute('state', { treeId, followCurrent: !treeId, sourceThreadId: hostThreadId(extra) })));
+  }, async ({ treeId }, extra) => reply(await service.execute('state', { treeId, followCurrent: !treeId, sourceThreadId: hostThreadId(extra), opening: true })));
   registerAppTool(server, 'canvas_action', {
     title: '操作对话树', description: 'Perform a user-selected Branch Canvas action from the conversation tree UI.',
     inputSchema: { action: z.enum(['state', 'create_tree', 'select_node', 'create_branch', 'save_draft', 'cancel_draft', 'submit', 'stop', 'recover', 'doctor', 'export_tree', 'node_items']), args: z.record(z.string(), z.unknown()).optional() },

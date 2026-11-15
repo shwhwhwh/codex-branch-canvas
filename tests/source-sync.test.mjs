@@ -69,3 +69,25 @@ test('empty conversations stay usable; unfinished answers are never imported', a
     assert.equal(syncCompletedConversation(service.store.db,completedConversation(native,{allowEmpty:true})).treeId,result.treeId);
   }finally{await service.close();}
 });
+
+test('the panel stays available when Codex cannot read its current chat', async () => {
+  let reads = 0;
+  const service = new CanvasService({ filename: ':memory:', client: {
+    readConversation: async () => { reads++; throw Error('thread is unavailable'); },
+    close() {},
+  } });
+  const server = createMcpServer(service);
+  const client = new Client({ name:'test', version:'1' });
+  const [a,b] = InMemoryTransport.createLinkedPair();
+  await server.connect(a); await client.connect(b);
+  try {
+    const meta = { thread_id: 'missing-thread' };
+    const opened = await client.callTool({ name:'canvas_open', arguments:{}, _meta:meta });
+    assert.ok(!opened.isError);
+    assert.equal(opened._meta.canvas.nodes.length, 2);
+    assert.match(opened._meta.canvas.sourceSync.error, /同步失败/);
+    const state = await client.callTool({ name:'canvas_action', arguments:{ action:'state', args:{ followCurrent:true } }, _meta:meta });
+    assert.equal(state._meta.canvas.tree.id, opened._meta.canvas.tree.id);
+    assert.equal(reads, 1, 'polling reuses the recent sync outcome');
+  } finally { await client.close(); await server.close(); await service.close(); }
+});
